@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 # ISPS Liste
@@ -46,4 +45,5 @@ if ($ip != "::1" && $ip != "localhost" && $ip != "127.0.0.1" && $ip != "192.168.
         die('An error occurred while trying to access this website. Please try again later');
     }
 }
+
 ?>
